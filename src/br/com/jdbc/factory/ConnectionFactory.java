@@ -3,20 +3,20 @@ package br.com.jdbc.factory;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import javax.management.RuntimeErrorException;
 
 import java.sql.Connection;
 
 public class ConnectionFactory{
 	
-	public static Connection getConnection() throws SQLException{
+	public static Connection getConnection(){
 		String url = "jdbc:postgresql://localhost:5432/livraria";
 		String user = "postgres";
 		String password = "qwer1234";
 		try{
 			return DriverManager.getConnection(url, user, password);
-		}catch(Error e){
-			throw new RuntimeErrorException(e);
+		}catch(SQLException e){
+			System.out.println(e.toString());
+			return null;
 		}
 	}
 	
