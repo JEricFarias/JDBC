@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 
 public class ConnectionFactory{
 	
@@ -26,6 +27,13 @@ public class ConnectionFactory{
 	
 	public static void main(String [] args) throws SQLException{
 		Connection com = ConnectionFactory.getConnection();
+		
+		DatabaseMetaData dbmd = com.getMetaData();
+		
+		System.out.println("Drive: " + dbmd.getDriverName() + " Versão: " + dbmd.getDriverVersion());
+		System.out.println("Suporte Select for Update " + dbmd.supportsSelectForUpdate());
+		System.out.println("Suporte Transaction " + dbmd.supportsTransactions());
+		
 		System.out.println("Fincionou");
 		com.close();
 	}
